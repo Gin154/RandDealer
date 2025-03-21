@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .about-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    .about-page header {
+        background: #333;
+        color: #fff;
+        padding: 1rem 0;
+        text-align: center;
+        width: 100%;
+        animation: fadeIn 2s ease-in-out;
+    }
+    .about-page header h1 {
+        margin: 0;
+    }
+    .about-page main {
+        padding: 2rem;
+        width: 100%;
+        max-width: 800px;
+    }
+    .about-page section {
+        background: #fff;
+        margin: 1rem 0;
+        padding: 1rem;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        animation: slideIn 1s ease-in-out;
+    }
+    .about-page section h2 {
+        color: #333;
+    }
+    .about-page section p {
+        color: #666;
+    }
+    .about-page a {
+        color: #007BFF;
+        text-decoration: none;
+    }
+    .about-page a:hover {
+        text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+</style>
+
+<div class="about-page">
+    <header>
+        <h1>About Us</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Our Mission</h2>
+            <p>At RandDealer, our mission is to provide the best random deals to our customers. We strive to offer a wide variety of products at unbeatable prices.</p>
+        </section>
+        <section>
+            <h2>Our Story</h2>
+            <p>Founded in 2023, RandDealer started as a small online store and has grown into a trusted platform for random deals. Our team is dedicated to finding the best products and delivering them to you.</p>
+        </section>
+        <section>
+            <h2>Contact Us</h2>
+            <p>If you have any questions or feedback, feel free to reach out to us at <a href="mailto:support@randdealer.com">support@randdealer.com</a>.</p>
+        </section>
+    </main>
+</div>
+{% endblock %}

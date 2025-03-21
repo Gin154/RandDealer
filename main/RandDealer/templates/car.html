@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+<style>
+    .maincontainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+        margin-bottom: 100px;
+        margin-top: 20px;
+        gap: 20px;
+        
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        max-width: 50%;
+        min-width: 300px;
+        height: auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        animation: fadeIn .3s forwards;
+        transition: transform 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }
+    .carinfo {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .carousel-container {
+        width: 100%;
+        position: relative;
+    }
+    .carousel {
+        position: relative;
+        width: 90%;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 10px;
+        height: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .carousel img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        z-index: 1;
+        transition: opacity 0.5s ease-in-out;
+    }
+    .carousel img.active {
+        opacity: 1;
+        z-index: 2;
+    }
+    .carousel .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #ffffff;
+        border: none;
+        border-radius: 50%;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 10;
+    }
+    .carousel .arrow.left {
+        left: 10px;
+    }
+    .carousel .arrow.right {
+        right: 10px;
+    }
+    .thumbnails {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    .thumbnails img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border: 2px solid transparent;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: border-color 0.3s;
+    }
+    .thumbnails img.active {
+        border-color: #007bff;
+    }
+</style>
+
+<div class="maincontainer">
+    <div class="container">
+        <div class="carinfo">
+            <h1 style="margin-bottom: 0;">{{ car.get_maker_display }} {{ car.model }}</h1>
+            <h3 style="margin-top: 0;">{{ car.get_condition_display }}</h3>
+            <p>Year: {{ car.year }}</p>
+            <p>Price: <span class="price">${{ car.price|intcomma }}</span></p>
+            <p>Posted: {{ car.created_at|naturaltime }}</p>
+        </div>
+
+        <div class="carousel-container">
+            <div class="carousel">
+                {% for image in car.images.all %}
+                    <img 
+                        src="{{ image.image.url }}" 
+                        alt="Image of {{ car.year }} {{ car.get_maker_display }} {{ car.model }}"
+                        class="{% if forloop.first %}active{% endif %}">
+                {% empty %}
+                    <p>No image available</p>
+                {% endfor %}
+                <button class="arrow left">&lt;</button>
+                <button class="arrow right">&gt;</button>
+            </div>
+
+            <div class="thumbnails">
+                {% for image in car.images.all %}
+                    <img 
+                        src="{{ image.image.url }}" 
+                        alt="Thumbnail of {{ car.year }} {{ car.get_maker_display }} {{ car.model }}"
+                        class="{% if forloop.first %}active{% endif %}" 
+                        data-index="{{ forloop.counter0 }}">
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const images = document.querySelectorAll('.carousel img');
+        const thumbnails = document.querySelectorAll('.thumbnails img');
+        const leftArrow = document.querySelector('.carousel .arrow.left');
+        const rightArrow = document.querySelector('.carousel .arrow.right');
+        let currentIndex = 0;
+
+        function updateCarousel(newIndex) {
+            images[currentIndex].classList.remove('active');
+            thumbnails[currentIndex].classList.remove('active');
+            currentIndex = (newIndex + images.length) % images.length;
+            images[currentIndex].classList.add('active');
+            thumbnails[currentIndex].classList.add('active');
+        }
+
+        thumbnails.forEach((thumbnail, index) => {
+            thumbnail.addEventListener('click', function () {
+                updateCarousel(index);
+            });
+        });
+
+        leftArrow.addEventListener('click', function () {
+            updateCarousel(currentIndex - 1);
+        });
+
+        rightArrow.addEventListener('click', function () {
+            updateCarousel(currentIndex + 1);
+        });
+    });
+</script>
+{% endblock %}
