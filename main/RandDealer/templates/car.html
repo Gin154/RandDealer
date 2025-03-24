@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load humanize %}
 
+{% block title %}
+{{ car.get_maker_display }} {{ car.model }}
+{% endblock %}
+
 {% block content %}
 <style>
     .maincontainer {
