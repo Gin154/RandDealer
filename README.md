@@ -13,6 +13,7 @@ RandDealer is a fully functional web application designed to help users advertis
 <img src="https://github.com/user-attachments/assets/33431251-22aa-4c97-9270-5bd4313b975e" width="40%">
 
 
-[My LinkedIn](https://www.linkedin.com/in/gean-s/).
+
+[https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white](https://www.linkedin.com/in/gean-s/).
 
 
