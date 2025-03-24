@@ -9,8 +9,10 @@ RandDealer is a fully functional web application designed to help users advertis
 * Login and Register user accounts
 
 
+<img src="https://github.com/user-attachments/assets/d478b456-4a7c-405b-98b8-6161cfd31255" width="100">
+<img src="https://github.com/user-attachments/assets/33431251-22aa-4c97-9270-5bd4313b975e" width="100">
+
+
 [My LinkedIn](https://www.linkedin.com/in/gean-s/).
 
 
-
-![Homepage](https://github.com/user-attachments/assets/d478b456-4a7c-405b-98b8-6161cfd31255) ![Catalog Page](https://github.com/user-attachments/assets/33431251-22aa-4c97-9270-5bd4313b975e)
