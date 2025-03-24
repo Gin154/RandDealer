@@ -4,12 +4,11 @@ RandDealer is a fully functional web application designed to help users advertis
 
 ![Homepage](https://github.com/user-attachments/assets/d478b456-4a7c-405b-98b8-6161cfd31255) ![Catalog Page](https://github.com/user-attachments/assets/33431251-22aa-4c97-9270-5bd4313b975e)
 
-#Here's what is possible so far on RandDealer:
-
-*Add a car for sale
-*Upload car images
-*Contact seller to buy a car
-*Login and Register user accounts
+# Here's what is possible so far on RandDealer:
+* Add a car for sale
+* Upload car images
+* Contact seller to buy a car
+* Login and Register user accounts
 
 
 [My LinkedIn](https://www.linkedin.com/in/gean-s/).
