@@ -4,93 +4,10 @@
 {%block title%}Catalog{%endblock%}
 
 {% block content %}
-<style>
 
-    .container {
-        display: flex;
-        flex-direction: column;
-        width: 90%;
-        max-width: 300px;
-        height: auto;
-        margin: 15px;
-        padding: 20px;
-        background-color: #ffffff;
-        border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        opacity: 0;
-        animation: fadeIn .3s forwards;
-        transition: transform 0.3s ease-in-out;
-    }
+{% load static %}
 
-
-    @keyframes fadeIn {
-        to {
-            opacity: 1;
-        }
-    }
-
-    .container:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-    }
-
-
-    .carimg {
-        width: 100%;
-        height: 70%;
-        border-radius: 10px;
-        object-fit: cover;
-        transition: transform 0.3s ease-in-out;
-    }
-    .carimg img {
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        object-fit: cover;
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .carimg img:hover {
-        transform: scale(1.05);
-    }
-
-
-    .carinfo {
-        padding: 10px;
-        text-align: center;
-        font-family: 'Arial', sans-serif;
-    }
-
-
-    .carinfo h2 {
-        font-size: 1.5em;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 10px;
-    }
-
-    .carinfo p {
-        font-size: 1.1em;
-        color: #666;
-        margin: 5px 0;
-    }
-
-    .carinfo .price {
-        font-size: 1.2em;
-        color: #007bff;
-        font-weight: bold;
-    }
-
-
-    .bigcontainer {
-        margin-top: 40px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-        margin-bottom: 200px;
-    }
-</style>
+<link rel="stylesheet" href="{% static 'styles/carlist.css' %}">
 
 <div class="bigcontainer">
     

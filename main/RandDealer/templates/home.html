@@ -3,79 +3,13 @@
 {%block title%}Welcome{%endblock%}
 
 {% block content %}
-<style>
-    .home-page {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-    }
-    .home-page .container {
-        max-width: 800px;
-        margin: 50px auto;
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .home-page .btn {
-        display: inline-block;
-        padding: 10px 20px;
-        font-size: 16px;
-        color: #fff;
-        background-color: #28a745;
-        border: none;
-        border-radius: 5px;
-        text-decoration: none;
-        cursor: pointer;
-    }
-    .home-page .btn:hover {
-        background-color: #218838;
-    }
-    .home-page .display-4 {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-    }
-    .home-page .lead {
-        font-size: 1.25rem;
-        margin-bottom: 20px;
-    }
-    .home-page .h3 {
-        font-size: 1.75rem;
-        margin-bottom: 10px;
-    }
-    .home-page .list-group {
-        list-style: none;
-        padding: 0;
-    }
-    .home-page .list-group-item {
-        padding: 10px;
-        margin-bottom: 10px;
-        background-color: #f8f9fa;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-    .home-page .form-inline {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-    }
-    .home-page .form-control {
-        padding: 10px;
-        font-size: 16px;
-        margin-right: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-    .home-page .form-control:focus {
-        outline: none;
-        border-color: #80bdff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
-    }
-</style>
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'styles/home.css'%}">
 
 <div class="home-page">
     <div class="container">
-        <a href="{% url 'test' %}" class="btn">Home</a>
         <h1 class="display-4 text-center">Welcome to RandDealer</h1>
         <p class="lead text-center">Your one-stop shop for buying, selling, and trading cars!</p>
 
