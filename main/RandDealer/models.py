@@ -1,4 +1,7 @@
 from django.db import models
+import uuid
+from django.utils import timezone
+from django.contrib.auth.models import User
 
 class Cars(models.Model):
     id = models.AutoField(primary_key=True)
@@ -58,10 +61,18 @@ class CarImage(models.Model):
     def __str__(self):
         return f"Image for {self.car}"
     
-class userconfirmation(models.Model):
-    username = models.CharField(max_length=50)
-    email = models.EmailField()
-    code = models.CharField(max_length=6)
+#custom User model to add e-mail token
+class EmailVerificationToken(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    token = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    is_verified = models.BooleanField(default=False)
+
+    def is_expired(self):
+        expiration = self.created_at + timezone.timedelta(days=1)
+        return timezone.now() > expiration
+    
     def __str__(self):
-        return f"Confirmation for {self.username}, {self.code}"
+        return f"{self.user} {self.is_verified} {self.token} {self.created_at}"
+    
+
