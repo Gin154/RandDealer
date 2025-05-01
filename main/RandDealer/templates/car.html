@@ -19,7 +19,15 @@
             <p>Year: {{ car.year }}</p>
             <p>Price: <span class="price">${{ car.price|intcomma }}</span></p>
             <p>Posted: {{ car.created_at|naturaltime }}</p>
-            <p>Onwer: {{ car.owner.username }}</p>
+
+            <p>Onwer: 
+                {% if user.first_name %}
+                    {{ car.owner.first_name }} {{ car.owner.last_name }}
+                {% else %}
+                    {{ car.owner.username }}
+                {% endif %}
+            </p>
+
             <p>Contact: <a href="mailto:{{ car.owner.email }}?subject=Interested in the {{ car.year }} {{ car.get_maker_display }} {{ car.model }}">{{ car.owner.email }}</a></p>
         </div>
         

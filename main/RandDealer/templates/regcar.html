@@ -7,7 +7,7 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'styles/RandDealer/regcar.css' %}">
-
+<script src="https://cdn.jsdelivr.net/npm/cleave.js@latest/dist/cleave.min.js"></script>
 
     <div class="container" class="fade-in">
         <h2>Register a New Car</h2>
@@ -31,7 +31,9 @@
                     <input type="file" id="images" name="images" multiple required onchange="previewImages()">
                     <span class="error-message">Please upload at least one image.</span>
                 </div>
+                
                 <div class="image-preview" id="imagePreview"></div>
+
                 <div class="button-container">
                     <button type="submit">Register Car</button>
                 </div>
@@ -40,6 +42,20 @@
     </div>
 
     <script>
+        new Cleave('#id_price', {
+            numeral: true,
+            numeralDecimalScale: 2,
+            prefix: '$',
+            delimiter: ','
+        });
+
+        new Cleave('#id_mileage', {
+            numeral: true,
+            numeralDecimalScale: 2,
+            prefix: '',
+            delimiter: ','
+        });
+
         function previewImages() {
             var preview = document.getElementById('imagePreview');
             preview.innerHTML = '';
@@ -54,16 +70,17 @@
 
                     var img = document.createElement('img');
                     img.src = e.target.result;
-
-                    var removeBtn = document.createElement('button');
-                    removeBtn.classList.add('remove-btn');
-                    removeBtn.innerHTML = 'X';
-                    removeBtn.onclick = function() {
+                    
+                    var removeIcon = document.createElement('img');
+                    removeIcon.src = "{% static 'icons/removebtn.png' %}";
+                    removeIcon.alt = 'Remove';
+                    removeIcon.classList.add('remove-btn');
+                    removeIcon.onclick = function() {
                         imageBox.remove();
-                    };
+                    };                    
 
                     imageBox.appendChild(img);
-                    imageBox.appendChild(removeBtn);
+                    imageBox.appendChild(removeIcon);
                     preview.appendChild(imageBox);
                 }
 

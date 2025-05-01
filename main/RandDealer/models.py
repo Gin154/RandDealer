@@ -3,6 +3,9 @@ import uuid
 from django.utils import timezone
 from django.contrib.auth.models import User
 import os
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
+from datetime import datetime
 
 class Cars(models.Model):
     id = models.AutoField(primary_key=True)
@@ -33,6 +36,8 @@ class Cars(models.Model):
         ('tesla', 'Tesla'),
     ]
 
+    YEAR_CHOICES = [(year, year) for year in range(datetime.now().year, 1980, -1)]
+
     CONDITION_CHOICES = [
         ('NEW', 'New'),
         ('USED_EXCELLENT', 'Used - Excellent'),
@@ -43,10 +48,10 @@ class Cars(models.Model):
 
     maker = models.CharField(max_length=50, choices=MAKER_CHOICES)
     model = models.CharField(max_length=50)
-    year = models.IntegerField()
-    mileage = models.IntegerField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    condition = models.CharField(max_length=20, choices=CONDITION_CHOICES, default='USED')
+    year = models.IntegerField(choices=YEAR_CHOICES, default=datetime.now().year)
+    mileage = models.CharField(max_length=7)
+    price = models.CharField(max_length=20)
+    condition = models.CharField(max_length=20, choices=CONDITION_CHOICES, default='USED_BAD')
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -62,6 +67,11 @@ class CarImage(models.Model):
 
     def __str__(self):
         return f"Image for {self.car}"
+
+@receiver(post_delete, sender=CarImage)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    if instance.image:
+        instance.image.delete(save=False)
     
 #custom User model to add e-mail token
 class EmailVerificationToken(models.Model):
