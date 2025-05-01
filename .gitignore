@@ -1,2 +1,4 @@
 main/main/secretsettings.py
 main/static/admin
+/main/media/car_images
+main/db.sqlite3
