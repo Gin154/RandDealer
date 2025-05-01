@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{%block title%}Profile{%endblock%}
+
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/RandDealer/profile/profile.css' %}">
+
+<div class="mainbox">
+    <!--top of the user page - profile picture-->
+    <div class="profileupper">
+        <div class="profilepicbox">
+            {% if user.userprofile.profile_picture %}
+                <img src="{{ user.userprofile.profile_picture.url }}" alt="Profile Picture" class="profilepic">
+            {% else %}
+                <img src="{% static 'profile/profile-icon.png' %}" alt="Default Profile Picture" class="profilepic">
+            {% endif %}
+                <a href="{% url 'editprofileinfo' %}"><img src="{% static 'profile/edit-interface-symbol.png' %}" class="editicon"></a>
+        </div>
+        <div class="profilenamebox">
+            <div class="profilename">
+                {% if user.first_name and user.last_name %}
+                    <span>{{ user.first_name }} {{ user.last_name }}</span>
+                {% elif user.first_name %}
+                    <span>{{ user.first_name }}</span>
+                {% elif user.last_name %}
+                    <span>{{ user.last_name }}</span>
+                {% else %}
+                    <span>{{ user.username }}</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="profilemiddle">
+        <div class="userinfo">
+            <div class="email"><span class="emailtitle">Email: </span>{{ user.email }}</div>
+            <div class="username"><span class="usernametitle">Username: </span>{{ user.username }}</div>
+            <div class="datejoined"><span class="datejoinedtitle">Joined on: </span>{{ user.date_joined }}</div>
+        </div>
+
+        <div class="carscontainer">
+            {% if cars %}
+            {% for car in cars %}
+            
+            <a href="{% url 'car' car.id %}" style="text-decoration:none;" class="container">
+                    <div class="carimg">
+                        {% with car.images.all|first as first_image %}
+                            {% if first_image %}
+                                <img src="{{ first_image.image.url }}" alt="Image of {{ car.year }} {{ car.get_maker_display }} {{ car.model }}">
+                            {% else %}
+                                <p>No image available</p>
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+        
+                    <div class="carinfo">
+                        <h2>{{ car.get_maker_display }} {{ car.model }}</h2>
+                        <p>Year: {{ car.year }}</p>
+                        <p class="price">Price: ${{ car.price|floatformat:2|intcomma }}</p>
+                    </div>
+            </a>
+            {% endfor %}
+            
+            {% else %}
+        
+            <div class="bigcontainer" style="text-align: center;">
+                <div>You haven't added a car for sale yet.</div>
+                <a href="{% url 'sell' %}" style="text-decoration:none;">
+                
+                    Sell a car
+                </a>
+            </div>
+        
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -2,6 +2,7 @@ from django.db import models
 import uuid
 from django.utils import timezone
 from django.contrib.auth.models import User
+import os
 
 class Cars(models.Model):
     id = models.AutoField(primary_key=True)
@@ -49,6 +50,7 @@ class Cars(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cars')
 
     def __str__(self):
         return f"{self.year} {self.maker} {self.model}"
@@ -76,3 +78,19 @@ class EmailVerificationToken(models.Model):
         return f"{self.user} {self.is_verified} {self.token} {self.created_at}"
     
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(upload_to='profilepic/', null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
+    
+    def save(self, *args, **kwargs):
+        try:
+            this = UserProfile.objects.get(id=self.id)
+            if this.profile_picture != self.profile_picture and this.profile_picture:
+                if os.path.isfile(this.profile_picture.path):
+                    os.remove(this.profile_picture.path)
+        except UserProfile.DoesNotExist:
+            pass
+        super(UserProfile, self).save(*args, **kwargs)

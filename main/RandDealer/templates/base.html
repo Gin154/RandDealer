@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{%block title%}{%endblock%} - Randdealer</title>
-    <link rel="stylesheet" href="{%static 'styles/base.css'%}">
+    <link rel="stylesheet" href="{%static 'styles/RandDealer/base.css'%}">
 </head>
 <body>
     <nav>
@@ -20,7 +20,17 @@
             <li><a href="{% url 'contact' %}">Contact</a></li> 
         </ul>
         {% if user.is_authenticated %}
-            <span class="nameandlogin"><span class="nameuser">Logged in as: {{ user.username }}</span><a href="{% url 'signout' %}" class="logout">Logout</a></span>
+        <div class="userbar">
+            <span class="nameandlogin">
+              <span class="nameuser">Logged in as: {{ user.username }}</span>
+              <span class="arrow">&#10151;</span>
+            </span>
+            
+            <div class="usermenu">
+              <a href="{% url 'profile' %}">Profile</a>
+              <a href="{% url 'signout' %}">Logout</a>
+            </div>
+          </div>
         {% else %}
             <a href="{% url 'signin' %}" class="sign-in">Sign In</a>
         {% endif %}
@@ -33,7 +43,7 @@
     <footer style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #001c38; color: #ffffff; text-align: center; padding: 5px 0; box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); font-size: 12px;">
         <p>&copy; 2024 RandDealer</p>
     </footer>
-
+    
     <script>
         document.querySelector('.menu-icon').addEventListener('click', function() {
             var navLinks = document.getElementById('nav-links');

@@ -7,10 +7,10 @@
 
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'styles/carlist.css' %}">
+<link rel="stylesheet" href="{% static 'styles/RandDealer/carlist.css' %}">
 
 <div class="bigcontainer">
-    
+    {% if cars %}
     {% for car in cars %}
     
     <a href="{% url 'car' car.id %}" style="text-decoration:none;" class="container">
@@ -30,7 +30,21 @@
                 <p class="price">Price: ${{ car.price|floatformat:2|intcomma }}</p>
             </div>
     </a>
-    {% endfor %}    
+    {% endfor %}
+    {% else %}
+
+    <div class="bigcontainer" style="text-align: center;">
+        <div class="carinfo" style="background-color: white; border-radius: 10px; padding: 20px; box-shadow: 1px;">No cars available at the moment</div>
+        <a href="home" style="text-decoration:none;" class="container">
+        
+            Click here to return to home
+        </a>
+    </div>
+
+    {% endif %}
+    
+
+
 </div>
 
 {% endblock %}

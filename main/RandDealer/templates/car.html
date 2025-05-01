@@ -9,7 +9,7 @@
 
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'styles/car.css' %}">
+<link rel="stylesheet" href="{% static 'styles/RandDealer/car.css' %}">
 
 <div class="maincontainer">
     <div class="container">
@@ -19,8 +19,10 @@
             <p>Year: {{ car.year }}</p>
             <p>Price: <span class="price">${{ car.price|intcomma }}</span></p>
             <p>Posted: {{ car.created_at|naturaltime }}</p>
+            <p>Onwer: {{ car.owner.username }}</p>
+            <p>Contact: <a href="mailto:{{ car.owner.email }}?subject=Interested in the {{ car.year }} {{ car.get_maker_display }} {{ car.model }}">{{ car.owner.email }}</a></p>
         </div>
-
+        
         <div class="carousel-container">
             <div class="carousel">
                 {% for image in car.images.all %}

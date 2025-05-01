@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(Cars)
 admin.site.register(CarImage)
 admin.site.register(EmailVerificationToken)
+admin.site.register(UserProfile)

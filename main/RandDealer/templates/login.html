@@ -3,14 +3,10 @@
 {%block title%}Sign in{%endblock%}
 
 {% block content %}
-    <style>
-        
-    </style>
-
 
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'styles/login.css' %}">
+<link rel="stylesheet" href="{% static 'styles/RandDealer/login.css' %}">
 
     <div class="login-container" id="login-container">
         {% if user.is_authenticated %}

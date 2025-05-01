@@ -1,6 +1,7 @@
 .container {
     max-width: 600px;
     margin: 0 auto;
+    margin-top: 10px;
     margin-bottom: 200px;
     padding: 20px;
     padding-bottom: 60px; /* Add padding to the bottom */
@@ -144,8 +145,6 @@ input:focus, select:focus, textarea:focus {
     color: red;
     margin-top: 5px;
 }
-
-
 
 input:valid, textarea:valid, select:valid {
     border-color: green;

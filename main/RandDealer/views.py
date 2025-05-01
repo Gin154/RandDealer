@@ -49,7 +49,10 @@ def sell(request):
         car_form = CarRegistrationForm(request.POST)
         
         if car_form.is_valid():
-            car_form.save()
+            user = request.user
+            car = car_form.save(commit=False)
+            car.owner = user
+            car.save()
             images = request.FILES.getlist('images')
             for image in images:
                 CarImage.objects.create(car=car_form.instance, image=image)
@@ -86,7 +89,7 @@ def signin(request):
             messages.error(request, 'Invalid username or password')
             return render(request, 'login.html')
     
-    #reads messages (to "delete them")
+    #reads messages (to "delete" them)
     else:
         storage = messages.get_messages(request)
         for i in storage:
@@ -128,7 +131,13 @@ def signup(request):
 
 #open car page with it's information
 def car(request, id):
-    car = Cars.objects.prefetch_related('images').get(id=id)
+    car = (
+    Cars.objects
+    .select_related('owner')
+    .prefetch_related('images')
+    .get(id=id)
+    )
+
     context = {'car': car}
     return render(request, 'car.html', context)
 
@@ -165,9 +174,9 @@ def registeruser(request):
             user = User.objects.create(
                 username=username,
                 email=email,
-                password=password1,
                 is_active=False
                 )
+            user.set_password(password1)
             user.save()
             
             confirmation = EmailVerificationToken.objects.create(user=user)
@@ -238,3 +247,44 @@ def verifyemail(request, token):
     except EmailVerificationToken.DoesNotExist:
         messages.error(request, 'Invalid verification link.')
         return redirect('registeruser')
+
+
+def profile(request):
+    try:
+        user = User.objects.select_related('userprofile').get(pk=request.user.pk)
+        cars = user.cars.all().prefetch_related('images')
+        edit=True
+        context = {
+        'cars': cars,
+        'user': user,
+        'edit': edit
+        }
+        return render(request, 'profile/profile.html', context)
+    except:
+        messages.error(request, f"You need to be logged in to access your profile")
+        return render(request, 'login.html')
+    
+
+def editprofileinfo(request):
+    try:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+        user = request.user
+
+        if request.method == 'POST':
+            form = ProfilePictureForm(request.POST, request.FILES, instance=user_profile)
+            if form.is_valid():
+                form.save()
+
+        if request.method =='POST':
+            form = AddUserInfo(request.POST, instance=user)
+            if form.is_valid():
+                form.save()
+        
+        
+        formpic = ProfilePictureForm(instance=user_profile)
+        forminfo = AddUserInfo(instance=user)
+                
+        return render(request, 'profile/editprofileinfo.html', {'formpic': formpic, 'forminfo':forminfo})
+    except Exception as e:
+        messages.error(request, f"{e}")
+        return render(request, 'error.html')
