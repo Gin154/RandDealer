@@ -42,20 +42,32 @@
     </div>
 
     <script>
-        new Cleave('#id_price', {
-            numeral: true,
-            numeralDecimalScale: 2,
-            prefix: '$',
-            delimiter: ','
+        /* price and mileage formating */
+        document.addEventListener('DOMContentLoaded', function () {
+            const formatWithDots = (value) => {
+                const digits = value.replace(/\D/g, '');
+                return digits ? digits.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '';
+            };
+
+            const priceInput = document.getElementById('id_price');
+            const mileageInput = document.getElementById('id_mileage');
+
+            priceInput.addEventListener('input', function () {
+                const digits = this.value.replace(/\D/g, '');
+                this.value = digits ? '$' + formatWithDots(digits) : '';
+            });
+
+            mileageInput.addEventListener('input', function () {
+                this.value = formatWithDots(this.value);
+            });
+
+            document.querySelector('form').addEventListener('submit', function () {
+                priceInput.value = priceInput.value.replace(/\D/g, '');
+                mileageInput.value = mileageInput.value.replace(/\D/g, '');
+            });
         });
 
-        new Cleave('#id_mileage', {
-            numeral: true,
-            numeralDecimalScale: 2,
-            prefix: '',
-            delimiter: ','
-        });
-
+        /* carimgs formating */
         function previewImages() {
             var preview = document.getElementById('imagePreview');
             preview.innerHTML = '';

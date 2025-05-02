@@ -6,6 +6,10 @@ class CarRegistrationForm(forms.ModelForm):
     class Meta:
         model = Cars
         fields = ['maker', 'model', 'year', 'mileage', 'price', 'condition', 'description']
+        widgets = {
+            'price': forms.TextInput(attrs={'class': 'priceinput'}),
+            'mileage': forms.TextInput(attrs={'class': 'mileageinput', 'maxlength': '7'})
+        }
 
 class ProfilePictureForm(forms.ModelForm):
     class Meta:

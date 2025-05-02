@@ -32,7 +32,7 @@
         </div>
         
         <div class="carousel-container">
-            <div class="carousel">
+            <div class="carousel" onclick=zoompic()>
                 {% for image in car.images.all %}
                     <img 
                         src="{{ image.image.url }}" 
@@ -88,5 +88,25 @@
             updateCarousel(currentIndex + 1);
         });
     });
+
+
+    function zoompic(element) {
+    const isZoomed = element.classList.toggle('zoomed');
+    
+    if (isZoomed) {
+        element.style.objectfit = 'contain';
+    } else {
+        element.style.objectfit = 'contain';
+    }
+}
+
+    document.querySelectorAll('.carousel').forEach(carousel => {
+        carousel.addEventListener('click', function(e) {
+            if (!e.target.classList.contains('arrow')) {
+                zoompic(this);
+            }
+        });
+    });
+
 </script>
 {% endblock %}
