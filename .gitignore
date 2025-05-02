@@ -3,7 +3,6 @@ main/static/admin
 /main/media/car_images
 main/db.sqlite3
 /main/media/profilepic
-/main/RandDealer/migrations
 venv/ 
 
 
