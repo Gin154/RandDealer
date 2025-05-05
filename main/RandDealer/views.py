@@ -288,3 +288,35 @@ def editprofileinfo(request):
     except Exception as e:
         messages.error(request, f"{e}")
         return render(request, 'error.html')
+    
+
+
+def newslettersub(request):
+    if request.method == 'POST':
+        try:
+            email = request.POST['email']
+            if NewsletterSub.objects.filter(email=email):
+                messagecontext= {
+                'message' : 'This e-mail address is already registered to our newsletter',
+                'title' : 'Already Registered'
+                }
+                return render(request, 'message.html', messagecontext)
+            else:
+                NewsletterSub.objects.create(email=email)
+                messagecontext= {
+                'message' : 'Your e-mail has been registered to receive our newsletter!',
+                'title' : 'Success'
+                }
+                return render(request, 'message.html', messagecontext)
+        
+        except Exception as e:
+            messagecontext = {
+                'message' : f'Sorry, something went wrong: {e}',
+                'title' : 'Error'
+            }
+            return (request, 'message.html', messagecontext)
+        
+    return redirect(index)
+
+def message(request):
+    return render(request, 'message.html')

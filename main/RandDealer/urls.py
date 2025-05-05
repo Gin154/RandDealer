@@ -19,5 +19,7 @@ urlpatterns = [
     path('verifyemail/<uuid:token>/', views.verifyemail, name='verifyemail'),
     path('afterregister', views.afterregister, name='afterregister'),
     path('profile', views.profile, name='profile'),
+    path('newslettersub', views.newslettersub, name='newslettersub'),
+    path('message', views.message, name='message'),
     path('editprofileinfo', views.editprofileinfo, name='editprofileinfo')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

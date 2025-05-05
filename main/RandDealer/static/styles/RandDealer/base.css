@@ -99,6 +99,7 @@ nav {
     min-width: 150px;
     text-align: center;
     transition: 0.4s ease;
+    z-index: 2;
 }
 
 .userbar:hover .usermenu {
@@ -186,9 +187,10 @@ nav {
         padding: 10px 20px;
     }
     .nameandlogin {
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         width: 100%;
+        gap:5px;
     }
     .nameuser, .sign-in, .logout {
         margin: 10px 0;

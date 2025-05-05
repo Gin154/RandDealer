@@ -19,6 +19,7 @@
             <p>Year: {{ car.year }}</p>
             <p>Price: <span class="price">${{ car.price|intcomma }}</span></p>
             <p>Posted: {{ car.created_at|naturaltime }}</p>
+            <p>Mileage: {{ car.mileage|intcomma }}</p>
 
             <p>Onwer: 
                 {% if user.first_name %}
@@ -32,12 +33,12 @@
         </div>
         
         <div class="carousel-container">
-            <div class="carousel" onclick=zoompic()>
+            <div class="carousel">
                 {% for image in car.images.all %}
                     <img 
                         src="{{ image.image.url }}" 
                         alt="Image of {{ car.year }} {{ car.get_maker_display }} {{ car.model }}"
-                        class="{% if forloop.first %}active{% endif %}">
+                        class="{% if forloop.first %}active{% endif %}" onclick="zoompic()">
                 {% empty %}
                     <p>No image available</p>
                 {% endfor %}
@@ -90,23 +91,19 @@
     });
 
 
-    function zoompic(element) {
-    const isZoomed = element.classList.toggle('zoomed');
-    
-    if (isZoomed) {
-        element.style.objectfit = 'contain';
-    } else {
-        element.style.objectfit = 'contain';
+    function zoompic() {
+        let element = document.querySelector('.active');
+        if (!element) return;
+        
+        if (element.style.objectFit === 'contain') {
+            element.style.objectFit = 'cover';
+            element.style.cursor = 'zoom-in';
+        } else {
+            element.style.objectFit = 'contain';
+            element.style.cursor = 'zoom-out';
+        }
     }
-}
 
-    document.querySelectorAll('.carousel').forEach(carousel => {
-        carousel.addEventListener('click', function(e) {
-            if (!e.target.classList.contains('arrow')) {
-                zoompic(this);
-            }
-        });
-    });
 
 </script>
 {% endblock %}

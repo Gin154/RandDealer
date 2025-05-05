@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ title }} {% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/RandDealer/message.css' %}">
+<div class="outbox">
+    <div class="mainbox">
+        <div class="messagebox">
+            
+            {% if messages %}
+                {% for message in messages %}
+                    <div>{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+
+            {% if message %}    
+                <div>{{ message }}</div>
+            {% endif %}
+            
+
+        </div>
+        <a href="{% url 'home' %}" class="homebutton">Return Home</a>
+    </div>
+</div>
+
+{% endblock %}

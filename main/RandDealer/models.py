@@ -104,3 +104,10 @@ class UserProfile(models.Model):
         except UserProfile.DoesNotExist:
             pass
         super(UserProfile, self).save(*args, **kwargs)
+
+
+class NewsletterSub(models.Model):
+    email = models.EmailField()
+
+    def __str__(self):
+        return f'Email: {self.email}'

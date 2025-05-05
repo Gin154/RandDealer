@@ -23,19 +23,22 @@
         </div>
 
         <div class="deals mt-5">
-            <h2 class="h3">Special Offers</h2>
+            <h2 class="h3">Why Choose Us?</h2>
             <ul class="list-group">
-                <li class="list-group-item">Get 20% off on 2015 Toyota Camry with coupon code <strong>CAMRY20</strong></li>
-                <li class="list-group-item">Save $2000 on 2018 Honda Accord with coupon code <strong>ACCORD2000</strong></li>
-                <li class="list-group-item">Enjoy $3000 off on 2017 Ford Mustang with coupon code <strong>MUSTANG3000</strong></li>
+                <li class="list-group-item">✔️ 120-Point Inspection on <strong>Every Vehicle</strong></li>
+                <li class="list-group-item">✔️ <strong>6-Month</strong> Limited Warranty Included </li>
+                <li class="list-group-item">✔️ <strong>Free CarFax</strong> Report with <strong>Every Purchase</strong> </li>
             </ul>
         </div>
 
         <div class="newsletter mt-5">
             <h2 class="h3">Subscribe to our Newsletter</h2>
-            <form action="subscribe" method="post" class="form-inline">
-                <label for="email" class="sr-only">Email:</label>
-                <input type="email" id="email" name="email" required class="form-control" placeholder="Enter your email">
+            <form action="{% url 'newslettersub' %}" method="post" class="form-inline">
+                {%csrf_token%}
+                <div>
+                    <label for="email" class="emaillabel">Email:</label>
+                    <input type="email" id="email" name="email" required class="form-control" placeholder="Enter your email">
+                </div>
                 <button type="submit" class="btn">Subscribe</button>
             </form>
         </div>
