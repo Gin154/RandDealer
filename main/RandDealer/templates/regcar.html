@@ -28,7 +28,7 @@
                 {{ car_form.as_p }}
                 <div class="form-group file-input">
                     <label for="images">Upload Car Images</label>
-                    <input type="file" id="images" name="images" multiple required onchange="previewImages()">
+                    <input type="file" id="images" name="images" accept="image/*" multiple required onchange="previewImages()">
                     <span class="error-message">Please upload at least one image.</span>
                 </div>
                 

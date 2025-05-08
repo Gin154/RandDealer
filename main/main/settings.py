@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = secretsettings.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = secretsettings.DEBUG
 
 ALLOWED_HOSTS = secretsettings.ALLOWED_HOSTS
 

@@ -14,7 +14,7 @@
     {% for car in cars %}
     
     <a href="{% url 'car' car.id %}" style="text-decoration:none;" class="container">
-            <div class="carimg">
+            
                 {% with car.images.all|first as first_image %}
                     {% if first_image %}
                         <img src="{{ first_image.image.url }}" alt="Image of {{ car.year }} {{ car.get_maker_display }} {{ car.model }}">
@@ -22,7 +22,6 @@
                         <p>No image available</p>
                     {% endif %}
                 {% endwith %}
-            </div>
 
             <div class="carinfo">
                 <h2>{{ car.get_maker_display }} {{ car.model }}</h2>

@@ -13,26 +13,17 @@
 
 <div class="maincontainer">
     <div class="container">
-        <div class="carinfo">
-            <h1 style="margin-bottom: 0;">{{ car.get_maker_display }} {{ car.model }}</h1>
-            <h3 style="margin-top: 0;">{{ car.get_condition_display }}</h3>
-            <p>Year: {{ car.year }}</p>
-            <p>Price: <span class="price">${{ car.price|intcomma }}</span></p>
-            <p>Posted: {{ car.created_at|naturaltime }}</p>
-            <p>Mileage: {{ car.mileage|intcomma }}</p>
-
-            <p>Onwer: 
-                {% if user.first_name %}
-                    {{ car.owner.first_name }} {{ car.owner.last_name }}
-                {% else %}
-                    {{ car.owner.username }}
-                {% endif %}
-            </p>
-
-            <p>Contact: <a href="mailto:{{ car.owner.email }}?subject=Interested in the {{ car.year }} {{ car.get_maker_display }} {{ car.model }}">{{ car.owner.email }}</a></p>
+        <div class="containersection1">
+            <div class="titlediv">
+                <span class="nameandmodelspan">{{ car.get_maker_display }} {{ car.model }}</span>
+                <span class="conditionspan">{{ car.get_condition_display }}</span>
+            </div>
+            <div class="pricediv">
+                ${{ car.price|intcomma }}
+            </div>
         </div>
         
-        <div class="carousel-container">
+        <div class="carousel-container containersection2">
             <div class="carousel">
                 {% for image in car.images.all %}
                     <img 
@@ -56,6 +47,44 @@
                 {% endfor %}
             </div>
         </div>
+
+        <div class="containersection3">
+            <div class="sellerinfo">
+
+                <p class="sellerinfotitle">Seller</p>
+
+                <div class="sellerpicandname">
+
+                    <div class="sellerpicture">
+                    {% if car.owner.userprofile.profile_picture %}
+                        <img src="{{ car.owner.userprofile.profile_picture.url }}" alt="Profile Picture" class="profilepic">
+                    {% else %}
+                        <img src="{% static 'profile/profile-icon.png' %}" alt="Default Profile Picture" class="profilepic">
+                    {% endif %}
+                    </div>
+                    <div class="sellername"> 
+                        {% if car.owner.first_name %}
+                            {{ car.owner.first_name }} {{ car.owner.last_name }}
+                        {% else %}
+                            {{ car.owner.username }}
+                        {% endif %}
+                    </div>
+
+                </div> 
+                <p> Joined on: {{ car.owner.date_joined|date:"d M Y" }}</p>
+
+                <p class="sellercontact"><a href="mailto:{{ car.owner.email }}?subject=Interested in the {{ car.year }} {{ car.get_maker_display }} {{ car.model }}">Contact Seller</a></p>
+
+            </div>
+
+            <div class="carinfo">
+                <p class="carinfotitle">Car Info</p>
+                <p>Year: {{ car.year }}</p>
+                <p>Price: <span class="price">${{ car.price|intcomma }}</span></p>
+                <p>Posted: {{ car.created_at|naturaltime }}</p>
+                <p>Mileage: {{ car.mileage|intcomma }}</p>
+            </div>
+        </div> 
     </div>
 </div>
 

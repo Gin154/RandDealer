@@ -6,6 +6,7 @@
 
 {% load static %}
 <link rel="stylesheet" href="{% static 'styles/RandDealer/profile/profile.css' %}">
+<link rel="stylesheet" href="{% static 'styles/RandDealer/carlist.css' %}">
 
 <div class="mainbox">
     <!--top of the user page - profile picture-->
@@ -45,21 +46,20 @@
             {% for car in cars %}
             
             <a href="{% url 'car' car.id %}" style="text-decoration:none;" class="container">
-                    <div class="carimg">
-                        {% with car.images.all|first as first_image %}
-                            {% if first_image %}
-                                <img src="{{ first_image.image.url }}" alt="Image of {{ car.year }} {{ car.get_maker_display }} {{ car.model }}">
-                            {% else %}
-                                <p>No image available</p>
-                            {% endif %}
-                        {% endwith %}
-                    </div>
-        
-                    <div class="carinfo">
-                        <h2>{{ car.get_maker_display }} {{ car.model }}</h2>
-                        <p>Year: {{ car.year }}</p>
-                        <p class="price">Price: ${{ car.price|floatformat:2|intcomma }}</p>
-                    </div>
+            
+                {% with car.images.all|first as first_image %}
+                    {% if first_image %}
+                        <img src="{{ first_image.image.url }}" alt="Image of {{ car.year }} {{ car.get_maker_display }} {{ car.model }}">
+                    {% else %}
+                        <p>No image available</p>
+                    {% endif %}
+                {% endwith %}
+
+                <div class="carinfo">
+                    <h2>{{ car.get_maker_display }} {{ car.model }}</h2>
+                    <p>Year: {{ car.year }}</p>
+                    <p class="price">Price: ${{ car.price|floatformat:2|intcomma }}</p>
+                </div>
             </a>
             {% endfor %}
             
