@@ -2,9 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
     width: 100%;
-    margin-bottom: 100px;
+    margin-bottom: 25vh;
     margin-top: 20px;
     gap: 20px;
     
@@ -13,6 +12,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 20px;
     width: 50%;
     max-width: 50%;
     min-width: 300px;
@@ -44,7 +44,7 @@
     margin: 0 auto;
     overflow: hidden;
     border-radius: 10px;
-    height: 500px;
+    height: 30vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -86,19 +86,190 @@
 }
 .thumbnails {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    padding-inline: 20px;
     gap: 10px;
     margin-top: 20px;
 }
+
 .thumbnails img {
     width: 60px;
     height: 60px;
     object-fit: cover;
-    border: 2px solid transparent;
+    border: 3px solid transparent;
     cursor: pointer;
     border-radius: 5px;
-    transition: border-color 0.3s;
+    transition: border-color 0.5s, scale 0.2s;
 }
+
+.thumbnails img:hover {
+    scale: 1.1;
+}
+
 .thumbnails img.active {
     border-color: #007bff;
+}
+
+.containersection1 {
+    display: flex;
+    align-items: center;
+    height: max-content;
+    width: 90%;
+    justify-content: space-between;
+}
+
+.titlediv {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: auto;
+}
+.nameandmodelspan{
+    font-size: 2.5vw;
+    font-weight: 600;
+    width: auto;
+}
+
+.conditionspan {
+    font-size: 1.5vw;
+    font-weight: 400;
+}
+
+.pricediv {
+    font-size: 1.5vw;
+    font-weight: 400;
+}
+
+@media (max-width:1200px) {
+    .containersection1 {
+        flex-direction: column;
+    }
+    .titlediv {
+        text-align: center;
+        align-items: center;
+    }
+    .nameandmodelspan{
+        font-size: 4vw;
+    }
+    
+    .conditionspan {   
+        font-size: 2vw;
+    }
+
+    .pricediv{
+        font-size: 2vw;
+    }
+
+}
+
+.containersectiondescription {
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 80%;
+    text-align: center;
+    padding-inline: 20px;
+    box-shadow: 0px 2px 5px -2px rgb(131, 131, 131);
+    padding-block: 20px;
+    border-radius: 10px;
+
+}
+
+.containersectiondescription span {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+
+.containersection3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 30px;
+}
+
+.sellerinfo, .carinfo {
+    background-color: #f7f7f7;
+    width: 20vw;
+    height: 25vh;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px -2px rgb(131, 131, 131);
+    min-width: 300px;
+}
+
+
+.sellerinfo > p {
+    text-align: center;
+}
+
+.sellerinfotitle {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.sellerpicture{
+    height: 100%;
+}
+
+.sellerpicandname {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 60px;
+    justify-content: center;
+    gap: 10px;
+    margin-right: 7px;
+}
+
+.profilepic{
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+    object-fit: cover;
+}
+
+.carinfotitle {
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.sellercontact {
+    text-align: center;
+    transition-duration: 0.2s;
+}
+.sellercontact > a {
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 10px;
+    background:linear-gradient(#00264d, rgb(0, 0, 160));
+    color: white;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.sellercontact:hover {
+    scale: 1.05;
+}
+
+.sellercontact > a:hover {
+    background: linear-gradient(#00376d, rgb(0, 0, 206));
+}
+
+@media (max-width: 1200px) {
+    .containersection3{
+        flex-direction:column-reverse;
+        gap: 10px;
+    }
+    .sellerpicandname {
+        flex-direction: column;
+        padding-bottom: 20px;
+    }
+    .sellerinfo, .carinfo {
+        height: max-content;
+        padding-bottom: 20px;
+    }
+
 }

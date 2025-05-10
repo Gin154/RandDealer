@@ -25,17 +25,10 @@
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
-
-.carimg {
+.container img {
     width: 100%;
-    height: 70%;
-    border-radius: 10px;
-    object-fit: cover;
-    transition: transform 0.3s ease-in-out;
-}
-.carimg img {
-    width: 100%;
-    height: 100%;
+    min-height: 65%;
+    height: 65%;
     border-radius: 10px;
     object-fit: cover;
     transition: transform 0.3s ease-in-out;
